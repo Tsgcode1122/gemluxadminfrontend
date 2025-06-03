@@ -17,6 +17,8 @@ import ResetPasswordPage from "./Admin/ResetPasswordPage";
 import GlobalStyles from "./FixedComponent/GlobalStyles";
 
 import { Colors } from "./Colors/ColorComponent";
+import DisplayAbout from "./Component/DisplayAbout";
+import ServiceManager from "./Component/ServiceManager";
 
 const StyledResult = styled(Result)`
   .ant-result-title {
@@ -65,6 +67,8 @@ const routes = [
       { index: true, path: "/", element: <RegisterLogin /> },
 
       { path: "/reset-password", element: <ResetPasswordPage /> },
+      { path: "/about-us", element: <DisplayAbout /> },
+      { path: "/services-manager", element: <ServiceManager /> },
 
       { path: "*", element: <InvalidPath /> },
 

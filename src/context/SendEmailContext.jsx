@@ -13,7 +13,7 @@ export const SendEmailProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.post(
-        "https://santhotad.onrender.com/api/email/send-verification-code",
+        "http://localhost:5003/api/email/send-verification-code",
         email,
       );
       // Log success message or handle response

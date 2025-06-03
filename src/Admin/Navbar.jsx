@@ -23,7 +23,7 @@ const Navbar = () => {
 
     try {
       const response = await axios.post(
-        "https://santhotad.onrender.com/api/signature/send",
+        "http://localhost:5003/api/signature/send",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -56,25 +56,6 @@ const Navbar = () => {
                 </span>
               )}
             </p>
-            <MiniImage>
-              <Upload customRequest={handleUpload} showUploadList={false}>
-                <CustomButton loading={loading}>
-                  <img
-                    src={
-                      imageUrl ||
-                      userData?.image ||
-                      "https://www.gravatar.com/avatar/?s=200&d=mp"
-                    }
-                    style={{
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                      cursor: "pointer",
-                      opacity: loading ? 0.5 : 1,
-                    }}
-                  />
-                </CustomButton>
-              </Upload>
-            </MiniImage>
           </MenuToggle>
         </HeadSpace>
       </StyledNavbar>
@@ -91,12 +72,6 @@ const Navbar = () => {
             <Link to="/about">About Us</Link>
             <Link to="/blog">Blogs</Link>
           </LinkBig>
-          <Contact>
-            <Link to="/contact">
-              Contact Us
-              <img src={arrowUp} />{" "}
-            </Link>
-          </Contact>
         </BigCon>
       </BigNav>
     </>

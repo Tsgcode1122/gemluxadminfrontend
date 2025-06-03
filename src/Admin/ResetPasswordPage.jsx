@@ -149,7 +149,7 @@ const ResetPasswordPage = () => {
   const verifyCode = async (verificationCode) => {
     try {
       const response = await axios.post(
-        "https://santhotad.onrender.com/api/reset/verify-code",
+        "http://localhost:5003/api/reset/verify-code",
         {
           verificationCode,
           token: JSON.parse(localStorage.getItem("verificationToken")),

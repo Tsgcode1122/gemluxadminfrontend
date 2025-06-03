@@ -16,9 +16,9 @@ const AdminRoutes = () => {
 
       <Routes>
         <Route path="/" element={<AdminDashboard />} />
-        <Route path="/edit/:id" element={<EditPost />} />
-
-        <Route path="/allpost" element={<AllPost />} />
+        {/* <Route path="/edit/:id" element={<EditPost />} /> */}
+        {/* 
+        <Route path="/allpost" element={<AllPost />} /> */}
 
         <Route path="*" element={<InvalidPath />} />
       </Routes>

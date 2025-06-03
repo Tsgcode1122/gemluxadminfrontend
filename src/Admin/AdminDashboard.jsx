@@ -18,9 +18,7 @@ const AdminDashboard = () => {
         </HideSmall>
         <>
           {" "}
-          <HideSmall>
-            <Dashboard />
-          </HideSmall>
+          <HideSmall>{/* <Dashboard /> */}</HideSmall>
         </>
       </Layout>
       <>

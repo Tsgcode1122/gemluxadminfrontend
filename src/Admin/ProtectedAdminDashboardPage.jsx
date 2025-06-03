@@ -26,7 +26,7 @@ const ProtectedAdminDashboardPage = () => {
     const checkAdminStatus = async () => {
       try {
         const response = await axios.get(
-          `https://santhotad.onrender.com/api/auth/${userId}`,
+          `http://localhost:5003/api/auth/${userId}`,
         );
         setIsAdmin(response.data.isAdmin);
       } catch (error) {

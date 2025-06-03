@@ -15,7 +15,7 @@ const SignatureUpload = ({ onImageUpload }) => {
 
     try {
       const response = await axios.post(
-        "https://santhotad.onrender.com/api/signature/send",
+        "http://localhost:5003/api/signature/send",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

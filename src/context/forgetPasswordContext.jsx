@@ -14,7 +14,7 @@ export const ForgetPasswordProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.post(
-        "https://santhotad.onrender.com/api/auth/new-password",
+        "http://localhost:5003/api/auth/new-password",
         { email, newPassword },
       );
       console.log(response.data);

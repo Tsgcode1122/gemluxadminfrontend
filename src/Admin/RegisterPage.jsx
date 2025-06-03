@@ -84,7 +84,7 @@ const RegisterPage = () => {
 
   // Handling the manipulation where if you need explanation email me cause lol after many trial, i dont want to temper with the code {tsgcode201@gmail.com}
   const handleLoginClick = () => {
-    navigate("/adminlogin", { state: { activeTab: "login" } });
+    navigate("/", { state: { activeTab: "login" } });
   };
   const { registerUser } = useUserContext();
   const { ResetSendEmail } = useSendEmail();
@@ -111,7 +111,7 @@ const RegisterPage = () => {
     try {
       const email = values.email.toLowerCase();
       const emailExistsResponse = await axios.post(
-        "https://santhotad.onrender.com/api/auth/check-exists",
+        "http://localhost:5003/api/auth/check-exists",
         {
           email: email,
         },
@@ -169,7 +169,7 @@ const RegisterPage = () => {
   const verifyCode = async (verificationCode) => {
     try {
       const response = await axios.post(
-        "https://santhotad.onrender.com/api/email/verify-code",
+        "http://localhost:5003/api/email/verify-code",
         {
           verificationCode,
           token: JSON.parse(localStorage.getItem("verificationToken")),

@@ -117,9 +117,7 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(
-          "https://santhotad.onrender.com/api/auth/",
-        );
+        const response = await axios.get("http://localhost:5003/api/auth/");
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching Users:", error);
@@ -130,40 +128,11 @@ const Sidebar = () => {
   }, []);
   console.log(userData);
 
-  const handleUpload = async ({ file }) => {
-    setLoading(true);
-
-    const formData = new FormData();
-
-    formData.append("image", file);
-    formData.append("userId", userData?._id);
-
-    try {
-      const response = await axios.post(
-        "https://santhotad.onrender.com/api/signature/send",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        },
-      );
-
-      const uploadedImageUrl = response.data.imageUrl;
-
-      setImageUrl(uploadedImageUrl);
-
-      message.success("Profile image updated successfully!");
-    } catch (error) {
-      message.error("Upload failed. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // logout
   const handleLogout = () => {
     localStorage.removeItem("user");
     message.success("Logout Successful");
-    navigate("/adminlogin");
+    navigate("/");
   };
   return (
     <>
@@ -172,25 +141,6 @@ const Sidebar = () => {
 
         <Divider>
           <AdminMini>
-            <MiniImage>
-              <Upload customRequest={handleUpload} showUploadList={false}>
-                <CustomButton loading={loading}>
-                  <img
-                    src={
-                      imageUrl ||
-                      userData?.image ||
-                      "https://www.gravatar.com/avatar/?s=200&d=mp"
-                    }
-                    style={{
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                      cursor: "pointer",
-                      opacity: loading ? 0.5 : 1,
-                    }}
-                  />
-                </CustomButton>
-              </Upload>
-            </MiniImage>
             <p>
               Welcome{" "}
               {userData && (
@@ -199,26 +149,33 @@ const Sidebar = () => {
             </p>
           </AdminMini>
           <Head>Dashboard </Head>
-
-          {/* Users Menu */}
           <MenuDropdown>
-            <Menu
-              active={openMenu === "users"}
-              onClick={() => setOpenMenu(openMenu === "users" ? null : "users")}
-            >
-              {openMenu === "users" ? (
-                <IoIosArrowDown />
-              ) : (
-                <IoIosArrowForward />
-              )}
-              <PiUsersThree /> Admins
-            </Menu>
-            <SubMenu active={openMenu === "users"}>
-              {users.map((user, index) => (
-                <p key={index}>{user.fullName}</p>
-              ))}
-            </SubMenu>
+            {" "}
+            <Link to="/about-us" onClick={() => handleLinkClick("all")}>
+              <Menu active={openMenu === "About"}>
+                {openMenu === "About" ? (
+                  <IoIosArrowDown />
+                ) : (
+                  <IoIosArrowForward />
+                )}
+                <PiUsersThree /> About Us
+              </Menu>
+            </Link>
           </MenuDropdown>
+          {/*serbice*/}
+          <Link to="/services-manager" onClick={() => handleLinkClick("all")}>
+            <MenuDropdown>
+              <Menu active={openMenu === "inquire"}>
+                {openMenu === "users" ? (
+                  <IoIosArrowDown />
+                ) : (
+                  <IoIosArrowForward />
+                )}
+                <PiUsersThree /> Home Services
+              </Menu>
+            </MenuDropdown>
+          </Link>
+          {/* Users Menu */}
 
           {/* Blog Menu */}
           <MenuDropdown>
@@ -227,13 +184,13 @@ const Sidebar = () => {
               onClick={() => setOpenMenu(openMenu === "blog" ? null : "blog")}
             >
               {openMenu === "blog" ? <IoIosArrowDown /> : <IoIosArrowForward />}
-              <BsJournalBookmark /> Blog
+              <BsJournalBookmark /> Single Services
             </Menu>
             <SubMenu active={openMenu === "blog"}>
               <p>
                 <Circle active={activeCircle === "create"} />
                 <Link to="/admin" onClick={() => handleLinkClick("create")}>
-                  Create Post
+                  Weight Loss
                 </Link>
               </p>
               <p>
@@ -242,7 +199,16 @@ const Sidebar = () => {
                   to="/admin/allpost"
                   onClick={() => handleLinkClick("all")}
                 >
-                  All Posts
+                  Iv Hydration
+                </Link>
+              </p>
+              <p>
+                <Circle active={activeCircle === "all"} />
+                <Link
+                  to="/admin/allpost"
+                  onClick={() => handleLinkClick("all")}
+                >
+                  Neurotoxin
                 </Link>
               </p>
             </SubMenu>
