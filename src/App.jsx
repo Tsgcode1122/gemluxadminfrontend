@@ -19,6 +19,10 @@ import GlobalStyles from "./FixedComponent/GlobalStyles";
 import { Colors } from "./Colors/ColorComponent";
 import DisplayAbout from "./Component/DisplayAbout";
 import ServiceManager from "./Component/ServiceManager";
+import SingleServiceManager from "./Component/SingleServiceManager";
+import IVHydrationManager from "./Component/IVHydrationManager";
+import DermalFillerManager from "./Component/DermalFillerManager";
+import NeurotoxinManager from "./Component/NeurotoxinManager";
 
 const StyledResult = styled(Result)`
   .ant-result-title {
@@ -69,6 +73,10 @@ const routes = [
       { path: "/reset-password", element: <ResetPasswordPage /> },
       { path: "/about-us", element: <DisplayAbout /> },
       { path: "/services-manager", element: <ServiceManager /> },
+      { path: "/weight-loss", element: <SingleServiceManager /> },
+      { path: "/iv-hydration", element: <IVHydrationManager /> },
+      { path: "/dermalfiller", element: <DermalFillerManager /> },
+      { path: "/neurotoxin", element: <NeurotoxinManager /> },
 
       { path: "*", element: <InvalidPath /> },
 

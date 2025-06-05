@@ -189,26 +189,29 @@ const Sidebar = () => {
             <SubMenu active={openMenu === "blog"}>
               <p>
                 <Circle active={activeCircle === "create"} />
-                <Link to="/admin" onClick={() => handleLinkClick("create")}>
+                <Link
+                  to="/weight-loss"
+                  onClick={() => handleLinkClick("create")}
+                >
                   Weight Loss
                 </Link>
               </p>
               <p>
                 <Circle active={activeCircle === "all"} />
-                <Link
-                  to="/admin/allpost"
-                  onClick={() => handleLinkClick("all")}
-                >
+                <Link to="/iv-hydration" onClick={() => handleLinkClick("all")}>
                   Iv Hydration
                 </Link>
               </p>
               <p>
                 <Circle active={activeCircle === "all"} />
-                <Link
-                  to="/admin/allpost"
-                  onClick={() => handleLinkClick("all")}
-                >
+                <Link to="/neurotoxin" onClick={() => handleLinkClick("all")}>
                   Neurotoxin
+                </Link>
+              </p>
+              <p>
+                <Circle active={activeCircle === "all"} />
+                <Link to="/dermalfiller" onClick={() => handleLinkClick("all")}>
+                  Dermal Filler
                 </Link>
               </p>
             </SubMenu>
