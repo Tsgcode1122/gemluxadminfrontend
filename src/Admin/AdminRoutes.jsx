@@ -8,6 +8,18 @@ import styled, { createGlobalStyle } from "styled-components";
 
 import Navbar from "./Navbar";
 import AdminDashboard from "./AdminDashboard";
+import DisplayAbout from "../Component/DisplayAbout";
+import ServiceManager from "../Component/ServiceManager";
+import SingleServiceManager from "../Component/SingleServiceManager";
+import IVHydrationManager from "../Component/IVHydrationManager";
+import DermalFillerManager from "../Component/DermalFillerManager";
+import NeurotoxinManager from "../Component/NeurotoxinManager";
+import About from "../Component/About";
+import Home from "../Component/Home";
+import Weightloss from "../Component/Weightloss";
+import Ivhydration from "../Component/Ivhydration";
+import DermalFiller from "../Component/DermalFiller";
+import Neurotoxin from "../Component/Neurotoxin";
 
 const AdminRoutes = () => {
   return (
@@ -16,10 +28,15 @@ const AdminRoutes = () => {
 
       <Routes>
         <Route path="/" element={<AdminDashboard />} />
+        <Route path="/about-us" element={<About />} />,
+        <Route path="/services-manager" element={<Home />} />,
+        <Route path="/weight-loss" element={<Weightloss />} />,
+        <Route path="/iv-hydration" element={<Ivhydration />} />,
+        <Route path="/dermalfiller" element={<DermalFiller />} />,
+        <Route path="/neurotoxin" element={<Neurotoxin />} />,
         {/* <Route path="/edit/:id" element={<EditPost />} /> */}
         {/* 
         <Route path="/allpost" element={<AllPost />} /> */}
-
         <Route path="*" element={<InvalidPath />} />
       </Routes>
     </>

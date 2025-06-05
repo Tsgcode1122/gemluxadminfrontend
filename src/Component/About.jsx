@@ -1,41 +1,38 @@
 import React from "react";
 import { Layout } from "antd";
-import Sidebar from "./Sidebar";
 
-import Navbar from "./Navbar";
-import FooterNav from "./FooterNav";
 import { breakpoints } from "../FixedComponent/BreakPoints";
 import styled from "styled-components";
-import AdminWelcome from "../Component/AdminWelcome";
-import DisplayAbout from "../Component/DisplayAbout";
-import { Outlet } from "react-router-dom";
 
-const AdminDashboard = () => {
+import DisplayAbout from "./DisplayAbout";
+import Sidebar from "../Admin/Sidebar";
+import FooterNav from "../Admin/FooterNav";
+import Navbar from "../Admin/Navbar";
+
+const About = () => {
   return (
     <>
-      <Layout>
+      {/* <Navbar /> */}
+      <Layout style={{ minHeight: "" }}>
         <HideSmall>
           <Sidebar />
         </HideSmall>
-        <AdminWelcome />
+        <DisplayAbout />
         <>
           <HideSmall></HideSmall>
-        </>
-      </Layout>
-      <>
-        <HideBig></HideBig>
-      </>
 
-      <HideBig>
-        <FooterNav />
-      </HideBig>
-      <Outlet />
+          <HideBig></HideBig>
+          <HideBig>
+            <FooterNav />
+          </HideBig>
+        </>
+        <></>
+      </Layout>
     </>
   );
 };
 
-export default AdminDashboard;
-
+export default About;
 const HideBig = styled.div`
   @media (min-width: ${breakpoints.m}) {
     display: none;

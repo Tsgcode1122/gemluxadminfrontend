@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Input, Button, Upload, message, Spin, Form } from "antd";
+import { Input, Button, Upload, message, Spin, Form, Layout } from "antd";
 import { LuImageUp } from "react-icons/lu";
 import { CiIndent } from "react-icons/ci";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Sidebar from "../Admin/Sidebar";
 
 const DisplayAbout = () => {
   const [loading, setLoading] = useState(true);
@@ -81,55 +82,57 @@ const DisplayAbout = () => {
   };
 
   return (
-    <Spin spinning={loading}>
-      <Container>
-        <ImageSection>
-          <p>Cover Image</p>
-          <UploadContainer
-            customRequest={handleUpload}
-            showUploadList={false}
-            listType="picture-card"
-            beforeUpload={(file) => {
-              handleUpload({ file });
-              return false;
-            }}
-          >
-            <CustomButtons>
-              {imagesUrl ? (
-                <img src={imagesUrl} alt="Uploaded" />
-              ) : (
-                <LuImageUp />
-              )}
-            </CustomButtons>
-          </UploadContainer>
-          <p className="note">
-            Replace Image <br />
-            <span className="subnote">Not more than 1MB</span>
-          </p>
-        </ImageSection>
+    <>
+      <Spin spinning={loading}>
+        <Container>
+          <ImageSection>
+            <p>Cover Image</p>
+            <UploadContainer
+              customRequest={handleUpload}
+              showUploadList={false}
+              listType="picture-card"
+              beforeUpload={(file) => {
+                handleUpload({ file });
+                return false;
+              }}
+            >
+              <CustomButtons>
+                {imagesUrl ? (
+                  <img src={imagesUrl} alt="Uploaded" />
+                ) : (
+                  <LuImageUp />
+                )}
+              </CustomButtons>
+            </UploadContainer>
+            <p className="note">
+              Replace Image <br />
+              <span className="subnote">Not more than 1MB</span>
+            </p>
+          </ImageSection>
 
-        <ContentBox>
-          <StyledFormItem label="Description">
-            <StyledQuill
-              theme="snow"
-              value={quillText}
-              onChange={setQuillText}
-            />
-            <span className="word-counter">
-              ({countWords(quillText)}/800 words)
-            </span>
-          </StyledFormItem>
-        </ContentBox>
-        <Button
-          type="primary"
-          onClick={onFinish}
-          loading={loading}
-          style={{ marginTop: "1rem" }}
-        >
-          Submit Changes
-        </Button>
-      </Container>
-    </Spin>
+          <ContentBox>
+            <StyledFormItem label="Description">
+              <StyledQuill
+                theme="snow"
+                value={quillText}
+                onChange={setQuillText}
+              />
+              <span className="word-counter">
+                ({countWords(quillText)}/800 words)
+              </span>
+            </StyledFormItem>
+          </ContentBox>
+          <Button
+            type="primary"
+            onClick={onFinish}
+            loading={loading}
+            style={{ marginTop: "1rem" }}
+          >
+            Submit Changes
+          </Button>
+        </Container>
+      </Spin>
+    </>
   );
 };
 

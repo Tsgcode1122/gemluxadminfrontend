@@ -42,7 +42,7 @@ const LoginPage = () => {
       localStorage.setItem("user", encryptedUserData);
       console.log(encryptedUserData);
 
-      window.location.href = "/admin";
+      window.location.href = "/admin-welcome";
     } catch (error) {
       console.error("Error logging in:", error.message);
       message.error(error.message);

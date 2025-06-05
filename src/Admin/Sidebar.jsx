@@ -13,7 +13,6 @@ import { useUserData } from "../context/UserDataContext";
 const { Sider } = Layout;
 
 const SidebarContainer = styled(Sider)`
-  margin-top: -3rem;
   z-index: 999;
   position: fixed;
 
@@ -151,7 +150,7 @@ const Sidebar = () => {
           <Head>Dashboard </Head>
           <MenuDropdown>
             {" "}
-            <Link to="/about-us" onClick={() => handleLinkClick("all")}>
+            <Link to="/admin/about-us" onClick={() => handleLinkClick("all")}>
               <Menu active={openMenu === "About"}>
                 {openMenu === "About" ? (
                   <IoIosArrowDown />
@@ -163,7 +162,10 @@ const Sidebar = () => {
             </Link>
           </MenuDropdown>
           {/*serbice*/}
-          <Link to="/services-manager" onClick={() => handleLinkClick("all")}>
+          <Link
+            to="/admin/services-manager"
+            onClick={() => handleLinkClick("all")}
+          >
             <MenuDropdown>
               <Menu active={openMenu === "inquire"}>
                 {openMenu === "users" ? (
@@ -190,7 +192,7 @@ const Sidebar = () => {
               <p>
                 <Circle active={activeCircle === "create"} />
                 <Link
-                  to="/weight-loss"
+                  to="/admin/weight-loss"
                   onClick={() => handleLinkClick("create")}
                 >
                   Weight Loss
@@ -198,19 +200,28 @@ const Sidebar = () => {
               </p>
               <p>
                 <Circle active={activeCircle === "all"} />
-                <Link to="/iv-hydration" onClick={() => handleLinkClick("all")}>
+                <Link
+                  to="/admin/iv-hydration"
+                  onClick={() => handleLinkClick("all")}
+                >
                   Iv Hydration
                 </Link>
               </p>
               <p>
                 <Circle active={activeCircle === "all"} />
-                <Link to="/neurotoxin" onClick={() => handleLinkClick("all")}>
+                <Link
+                  to="/admin/neurotoxin"
+                  onClick={() => handleLinkClick("all")}
+                >
                   Neurotoxin
                 </Link>
               </p>
               <p>
                 <Circle active={activeCircle === "all"} />
-                <Link to="/dermalfiller" onClick={() => handleLinkClick("all")}>
+                <Link
+                  to="/admin/dermalfiller"
+                  onClick={() => handleLinkClick("all")}
+                >
                   Dermal Filler
                 </Link>
               </p>

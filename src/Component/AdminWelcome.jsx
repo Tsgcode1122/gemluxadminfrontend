@@ -9,10 +9,11 @@ import {
 } from "@ant-design/icons";
 
 const { Title, Paragraph, Text } = Typography;
-
+import { useUserData } from "../context/UserDataContext";
+import { breakpoints } from "../FixedComponent/BreakPoints";
 const Wrapper = styled.div`
   padding: 3rem;
-  background: #f8f9fa;
+
   min-height: 100vh;
   display: flex;
   align-items: flex-start;
@@ -20,12 +21,21 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled(Card)`
-  max-width: 800px;
+  max-width: 1200px;
   width: 100%;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  padding: 2rem;
+  padding: 0rem;
   background: white;
+  @media (min-width: ${breakpoints.xs}) {
+    padding: 2rem;
+  }
+  @media (min-width: ${breakpoints.m}) {
+    padding: 2cm;
+  }
+  @media (min-width: ${breakpoints.xl}) {
+    max-width: 1500px;
+  }
 `;
 
 const Step = styled.div`
@@ -45,13 +55,18 @@ const IconCircle = styled.div`
   font-size: 18px;
 `;
 
-const AdminWelcome = ({ name = "Admin" }) => {
+const AdminWelcome = () => {
+  const { userData } = useUserData();
   return (
     <Wrapper>
       <Content>
         <Title level={2}>
           <SmileOutlined style={{ color: "#faad14", marginRight: 10 }} />
-          Welcome, {name}!
+          Welcome,{" "}
+          {userData && (
+            <>{userData.fullName && userData.fullName.split(" ")[0]}</>
+          )}
+          !
         </Title>
 
         <Paragraph type="secondary" style={{ fontSize: "16px" }}>
@@ -71,9 +86,9 @@ const AdminWelcome = ({ name = "Admin" }) => {
             <Text strong>1. Use the Sidebar:</Text>
             <Paragraph>
               On the left sidebar, you'll see different sections like{" "}
-              <Text code>Services</Text>, <Text code>About</Text>,{" "}
-              <Text code>Booking</Text>, etc. Click on any section you’d like to
-              update.
+              <Text code> Home Services</Text>, <Text code>About</Text>,{" "}
+              <Text code>Single Services</Text>, etc. Click on any section you’d
+              like to update.
             </Paragraph>
           </div>
         </Step>
