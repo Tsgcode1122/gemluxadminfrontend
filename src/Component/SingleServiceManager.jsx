@@ -9,15 +9,19 @@ import {
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 2rem;
+  padding: 1rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
-
-const Grid = styled.div`
+const Contain = styled.div`
+  padding: 0rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
 `;
-
 const Card = styled.div`
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -140,30 +144,32 @@ const SingleServiceManager = () => {
   };
 
   return (
-    <Container>
-      <Grid>
-        {services.map((s) => (
-          <Card key={s._id}>
-            <EditBtn icon={<EditOutlined />} onClick={() => openModal(s)} />
-            <Popconfirm
-              title="Are you sure?"
-              onConfirm={() => handleDelete(s._id)}
-            >
-              <DeleteBtn icon={<DeleteOutlined />} danger />
-            </Popconfirm>
-            {s.image && <Image src={s.image} alt="service" />}
-            <h3>{s.name}</h3>
-            <p>{s.heading}</p>
-            <small>{s.price}</small>
-          </Card>
-        ))}
-      </Grid>
-      <div style={{ textAlign: "center", marginTop: 30 }}>
-        <Button type="primary" onClick={() => openModal()}>
-          Add New Single Service
-        </Button>
-      </div>
+    <>
+      <Container>
+        <Contain>
+          {services.map((s) => (
+            <Card key={s._id}>
+              <EditBtn icon={<EditOutlined />} onClick={() => openModal(s)} />
+              <Popconfirm
+                title="Are you sure?"
+                onConfirm={() => handleDelete(s._id)}
+              >
+                <DeleteBtn icon={<DeleteOutlined />} danger />
+              </Popconfirm>
+              {s.image && <Image src={s.image} alt="service" />}
+              <h3>{s.name}</h3>
+              <p>{s.heading}</p>
+              <small>{s.price}</small>
+            </Card>
+          ))}
+        </Contain>
 
+        <div style={{ textAlign: "center", marginTop: 30 }}>
+          <Button type="primary" onClick={() => openModal()}>
+            Add New Single Service
+          </Button>
+        </div>
+      </Container>
       <ServiceModal
         title={
           editingService ? "Edit Single Service" : "Add New Single Service"
@@ -241,7 +247,7 @@ const SingleServiceManager = () => {
           <Image src={imageUrl} alt="preview" style={{ marginTop: 10 }} />
         )}
       </ServiceModal>
-    </Container>
+    </>
   );
 };
 

@@ -83,153 +83,149 @@ const DisplayAbout = () => {
 
   return (
     <>
-      <Spin spinning={loading}>
-        <Container>
-          <ImageSection>
-            <p>Cover Image</p>
-            <UploadContainer
-              customRequest={handleUpload}
-              showUploadList={false}
-              listType="picture-card"
-              beforeUpload={(file) => {
-                handleUpload({ file });
-                return false;
-              }}
-            >
-              <CustomButtons>
-                {imagesUrl ? (
-                  <img src={imagesUrl} alt="Uploaded" />
-                ) : (
-                  <LuImageUp />
-                )}
-              </CustomButtons>
-            </UploadContainer>
-            <p className="note">
-              Replace Image <br />
-              <span className="subnote">Not more than 1MB</span>
-            </p>
-          </ImageSection>
+      <Wrapper>
+        <MainContainer>
+          <FlexSection>
+            <ImagePreviewCard>
+              <UploadContainer
+                customRequest={handleUpload}
+                showUploadList={false}
+                listType="picture-card"
+                beforeUpload={(file) => {
+                  handleUpload({ file });
+                  return false;
+                }}
+              >
+                <CustomButtons>
+                  {imagesUrl ? (
+                    <img src={imagesUrl} alt="Uploaded" />
+                  ) : (
+                    <LuImageUp />
+                  )}
+                </CustomButtons>
+              </UploadContainer>
+              <NoteText>
+                click on image to replace image <br />
+                <span>Max: 1MB</span>
+              </NoteText>
+            </ImagePreviewCard>
 
-          <ContentBox>
-            <StyledFormItem label="Description">
-              <StyledQuill
-                theme="snow"
-                value={quillText}
-                onChange={setQuillText}
-              />
-              <span className="word-counter">
-                ({countWords(quillText)}/800 words)
-              </span>
-            </StyledFormItem>
-          </ContentBox>
-          <Button
-            type="primary"
-            onClick={onFinish}
-            loading={loading}
-            style={{ marginTop: "1rem" }}
-          >
-            Submit Changes
-          </Button>
-        </Container>
-      </Spin>
+            <TextSection>
+              <StyledFormItem label="Description">
+                <StyledQuill
+                  theme="snow"
+                  value={quillText}
+                  onChange={setQuillText}
+                />
+                <span className="word-counter">
+                  ({countWords(quillText)}/800 words)
+                </span>
+              </StyledFormItem>
+            </TextSection>
+          </FlexSection>
+
+          <SubmitWrapper>
+            <Button type="primary" onClick={onFinish} loading={loading}>
+              Submit Changes
+            </Button>
+          </SubmitWrapper>
+        </MainContainer>
+      </Wrapper>
     </>
   );
 };
 
 export default DisplayAbout;
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+const Wrapper = styled.div`
+  min-height: 100vh;
+  background: #f5f7fa;
   padding: 2rem;
-
-  background: #f5f5f5;
-  min-height: calc(100vh - 4rem);
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
+  display: flex;
+  justify-content: center;
 `;
 
-const ImageSection = styled.div`
-  /* background: #ffffff; */
+const MainContainer = styled.div`
+  width: 100%;
+  max-width: 1300px;
+  background: white;
   border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+`;
 
-  .note {
-    margin-top: 0.5rem;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #888;
+const FlexSection = styled.div`
+  display: flex;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
+`;
 
-  .subnote {
-    font-size: 0.8rem;
+const ImagePreviewCard = styled.div`
+  flex: 1;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 450px;
+`;
+
+const UploadWrapper = styled(Upload)`
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+
+  .upload-placeholder {
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #d9d9d9;
+    border-radius: 12px;
+    background: #f0f0f0;
+
+    svg {
+      font-size: 3rem;
+      color: #999;
+    }
+
+    p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #666;
+    }
+  }
+`;
+
+const NoteText = styled.p`
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+  padding: 0.5rem;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+
+  span {
+    font-size: 0.75rem;
     color: #aaa;
   }
-
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
 `;
 
-const ContentBox = styled.div`
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  min-width: 300px;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
-`;
-
-const UploadContainer = styled(Upload)`
-  .ant-upload {
-    width: 100%;
-  }
-`;
-
-const CustomButtons = styled.div`
-  width: 100%;
-  height: 200px;
-  border: 2px dashed #d9d9d9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: all 0.3s;
-
-  &:hover {
-    border-color: #1890ff;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
+const TextSection = styled.div`
+  flex: 1;
 `;
 
 const StyledFormItem = styled(Form.Item)`
   width: 100%;
-  margin-top: 1rem;
 
   .word-counter {
     font-size: 0.85rem;
@@ -241,12 +237,59 @@ const StyledFormItem = styled(Form.Item)`
 
 const StyledQuill = styled(ReactQuill)`
   .ql-editor {
-    min-height: 200px;
+    min-height: 400px;
     font-size: 1rem;
     background: #fff;
   }
 
   .ql-container {
     border-radius: 8px;
+  }
+`;
+
+const SubmitWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+`;
+
+const UploadContainer = styled(Upload)`
+  .ant-upload {
+    all: unset; /* resets all inherited/default styles */
+    /* display: block; */
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  /* Optional: clear inner span or icon container styles */
+  .ant-upload-list,
+  .ant-upload-select {
+    /* display: none !important; */
+  }
+`;
+
+const CustomButtons = styled.div`
+  border: 2px dashed #d9d9d9;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  /* min-height: 300px; */
+
+  &:hover {
+    border-color: #1890ff;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
   }
 `;

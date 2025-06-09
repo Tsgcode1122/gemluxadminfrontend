@@ -14,10 +14,16 @@ const { Title } = Typography;
 const Container = styled.div`
   padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-top: 3rem;
   gap: 1rem;
 `;
-
+const Contain = styled.div`
+  padding: 0rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+`;
 const Card = styled.div`
   border: 1px solid #ddd;
   padding: 1rem;
@@ -122,29 +128,41 @@ const IVHydrationManager = () => {
   return (
     <>
       <Container>
-        {services.map((srv) => (
-          <Card key={srv._id}>
-            <Image src={srv.image} alt="IV" />
-            <Title level={4}>{srv.name}</Title>
-            <p>{srv.intro}</p>
-            <ul>
-              {srv.keyBenefits?.map((b, i) => (
-                <li key={i}>{b}</li>
-              ))}
-            </ul>
-            <p>
-              <strong>Outro:</strong> {srv.outro}
-            </p>
-            <Space style={{ position: "absolute", top: 10, right: 10 }}>
-              <Button icon={<EditOutlined />} onClick={() => openModal(srv)} />
-              <Button
-                icon={<DeleteOutlined />}
-                danger
-                onClick={() => handleDelete(srv._id)}
-              />
-            </Space>
-          </Card>
-        ))}
+        <Contain>
+          {services.map((srv) => (
+            <Card key={srv._id}>
+              <Image src={srv.image} alt="IV" />
+              <Title level={4}>{srv.name}</Title>
+              <p>{srv.intro}</p>
+              <ul>
+                {srv.keyBenefits?.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+              <p>
+                <strong>Outro:</strong> {srv.outro}
+              </p>
+              <Space style={{ position: "absolute", top: 10, right: 10 }}>
+                <Button
+                  icon={<EditOutlined />}
+                  onClick={() => openModal(srv)}
+                />
+                <Button
+                  icon={<DeleteOutlined />}
+                  danger
+                  onClick={() => handleDelete(srv._id)}
+                />
+              </Space>
+            </Card>
+          ))}
+        </Contain>
+        <Button
+          type="primary"
+          onClick={() => openModal()}
+          style={{ margin: "1rem" }}
+        >
+          Add IV Hydration Service
+        </Button>
       </Container>
 
       <Modal
@@ -208,13 +226,6 @@ const IVHydrationManager = () => {
           />
         )}
       </Modal>
-      <Button
-        type="primary"
-        onClick={() => openModal()}
-        style={{ margin: "1rem" }}
-      >
-        Add IV Hydration Service
-      </Button>
     </>
   );
 };

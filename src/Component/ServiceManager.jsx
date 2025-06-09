@@ -11,6 +11,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   padding: 2rem;
+  margin-top: 3rem;
 `;
 
 const Grid = styled.div`

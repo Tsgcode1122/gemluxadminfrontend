@@ -15,12 +15,18 @@ const { Title } = Typography;
 
 const Container = styled.div`
   padding: 2rem;
+  margin-top: 3rem;
   display: grid;
   gap: 1rem;
 `;
-
+const Contain = styled.div`
+  padding: 0rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+`;
 const Card = styled.div`
-  background: #fff;
   border: 1px solid #eee;
   padding: 1rem;
   border-radius: 8px;
@@ -102,40 +108,53 @@ const DermalFillerManager = () => {
   return (
     <>
       <Container>
-        {data.map((item) => (
-          <Card key={item._id}>
-            {item.image && (
-              <img
-                src={item.image}
-                alt="Dermal"
-                style={{
-                  width: "100%",
-                  maxHeight: "200px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                }}
-              />
-            )}
-            <p>{item.writeup}</p>
-            <ul>
-              {item.faqs.map((faq, index) => (
-                <li key={index}>
-                  <strong>{faq.question}</strong>
-                  <br />
-                  {faq.answer}
-                </li>
-              ))}
-            </ul>
-            <Space style={{ position: "absolute", top: 10, right: 10 }}>
-              <Button icon={<EditOutlined />} onClick={() => openModal(item)} />
-              <Button
-                icon={<DeleteOutlined />}
-                danger
-                onClick={() => handleDelete(item._id)}
-              />
-            </Space>
-          </Card>
-        ))}
+        <Contain>
+          {data.map((item) => (
+            <Card key={item._id}>
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt="Dermal"
+                  style={{
+                    width: "100%",
+                    maxHeight: "200px",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                  }}
+                />
+              )}
+              <p>{item.writeup}</p>
+              <ul>
+                {item.faqs.map((faq, index) => (
+                  <li key={index}>
+                    <strong>{faq.question}</strong>
+                    <br />
+                    {faq.answer}
+                  </li>
+                ))}
+              </ul>
+              <Space style={{ position: "absolute", top: 10, right: 10 }}>
+                <Button
+                  icon={<EditOutlined />}
+                  onClick={() => openModal(item)}
+                />
+                <Button
+                  icon={<DeleteOutlined />}
+                  danger
+                  onClick={() => handleDelete(item._id)}
+                />
+              </Space>
+            </Card>
+          ))}
+        </Contain>
+        <Button
+          type="primary"
+          onClick={() => openModal()}
+          icon={<PlusOutlined />}
+          style={{ marginBottom: "1rem" }}
+        >
+          Add Dermal Filler Entry
+        </Button>
       </Container>
 
       <Modal
@@ -220,14 +239,6 @@ const DermalFillerManager = () => {
           Add FAQ
         </Button>
       </Modal>
-      <Button
-        type="primary"
-        onClick={() => openModal()}
-        icon={<PlusOutlined />}
-        style={{ marginBottom: "1rem" }}
-      >
-        Add Dermal Filler Entry
-      </Button>
     </>
   );
 };

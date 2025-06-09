@@ -19,6 +19,7 @@ import GlobalStyles from "./FixedComponent/GlobalStyles";
 import { Colors } from "./Colors/ColorComponent";
 
 import AdminWelcome from "./Component/AdminWelcome";
+import Welcome from "./Component/Welcome";
 
 const StyledResult = styled(Result)`
   .ant-result-title {
@@ -65,7 +66,7 @@ const routes = [
     ),
     children: [
       { index: true, path: "/", element: <RegisterLogin /> },
-      { path: "/admin-welcome", element: <AdminWelcome /> },
+      { path: "/admin-welcome", element: <Welcome /> },
 
       { path: "/reset-password", element: <ResetPasswordPage /> },
 
