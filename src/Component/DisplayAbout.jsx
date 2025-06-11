@@ -47,6 +47,10 @@ const DisplayAbout = () => {
       };
 
       await axios.put("http://localhost:5003/api/about", updatedData);
+      await axios.post(
+        "http://localhost:5003/api/email/about-update",
+        updatedData,
+      );
       message.success("Post updated successfully!");
     } catch (error) {
       console.error("Error updating post:", error);
@@ -139,10 +143,20 @@ export default DisplayAbout;
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  background: #f5f7fa;
+  margin-bottom: 4rem;
+  /* background: #f5f7fa; */
   padding: 2rem;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 320px) {
+    padding: 1rem;
+  }
+  @media (min-width: 321px) and (max-width: 399px) {
+    padding: 1rem;
+  }
+  @media (min-width: 400px) and (max-width: 499px) {
+    padding: 1rem;
+  }
 `;
 
 const MainContainer = styled.div`
@@ -154,6 +168,15 @@ const MainContainer = styled.div`
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 320px) {
+    padding: 1rem;
+  }
+  @media (min-width: 321px) and (max-width: 399px) {
+    padding: 1rem;
+  }
+  @media (min-width: 400px) and (max-width: 499px) {
+    padding: 1rem;
+  }
 `;
 
 const FlexSection = styled.div`

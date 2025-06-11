@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Layout } from "antd";
 
 import { breakpoints } from "../FixedComponent/BreakPoints";
@@ -10,6 +10,9 @@ import FooterNav from "../Admin/FooterNav";
 import Navbar from "../Admin/Navbar";
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       {/* <Navbar /> */}

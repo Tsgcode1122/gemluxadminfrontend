@@ -16,6 +16,7 @@ const { Title } = Typography;
 const Container = styled.div`
   padding: 1rem;
   margin-top: 3rem;
+  margin-bottom: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,6 +92,11 @@ const NeurotoxinManager = () => {
     const payload = editing?._id ? { ...formData, _id: editing._id } : formData;
     try {
       await axios.put("http://localhost:5003/api/neurotoxin", payload);
+      await axios.post("http://localhost:5003/api/email/neurotoxin-update", {
+        isNew: !editing?._id,
+        entry: payload,
+      });
+
       message.success("Saved successfully");
       setModalOpen(false);
       fetchData();
@@ -171,7 +177,7 @@ const NeurotoxinManager = () => {
       >
         <TextArea
           placeholder="Writeup"
-          rows={4}
+          rows={6}
           value={formData.writeup}
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, writeup: e.target.value }))
@@ -209,7 +215,7 @@ const NeurotoxinManager = () => {
             <TextArea
               placeholder="Answer"
               value={faq.answer}
-              rows={2}
+              rows={6}
               onChange={(e) => {
                 const newFaqs = [...formData.faqs];
                 newFaqs[index].answer = e.target.value;

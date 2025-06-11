@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Layout } from "antd";
 
 import { breakpoints } from "../FixedComponent/BreakPoints";
@@ -11,6 +11,9 @@ import Navbar from "../Admin/Navbar";
 import AdminWelcome from "./AdminWelcome";
 
 const Welcome = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       {/* <Navbar /> */}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Layout } from "antd";
 
 import { breakpoints } from "../FixedComponent/BreakPoints";
@@ -11,6 +11,9 @@ import Navbar from "../Admin/Navbar";
 import ServiceManager from "./ServiceManager";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       {/* <Navbar /> */}

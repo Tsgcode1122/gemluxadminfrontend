@@ -144,8 +144,8 @@ const ServiceDropdown = styled.div`
   bottom: 58px;
   /* left: 50%; */
   transform: translateX(-50%);
-  background: white;
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(47, 47, 47, 0.1);
   border-radius: 8px 0;
   /* padding: 10px 0; */
   z-index: 2000;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import {
   createBrowserRouter,
@@ -79,13 +79,18 @@ const routes = [
 
 const router = createBrowserRouter(routes);
 
-const App = () => (
-  <>
-    {/* <PageUnderConstruction /> */}
-    <GlobalStyles />
+const App = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+  return (
+    <>
+      {/* <PageUnderConstruction /> */}
+      <GlobalStyles />
 
-    <RouterProvider router={router} />
-  </>
-);
+      <RouterProvider router={router} />
+    </>
+  );
+};
 
 export default App;

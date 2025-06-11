@@ -13,16 +13,22 @@ const { Title } = Typography;
 
 const Container = styled.div`
   padding: 2rem;
-  display: grid;
   margin-top: 3rem;
-  gap: 1rem;
+  margin-bottom: 5rem !important;
+
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
 `;
 const Contain = styled.div`
-  padding: 0rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  max-width: 800px;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  justify-content: center;
+  width: 100%;
 `;
 const Card = styled.div`
   border: 1px solid #ddd;
@@ -103,6 +109,11 @@ const IVHydrationManager = () => {
         ? { ...formData, _id: editing._id }
         : formData;
       await axios.put("http://localhost:5003/api/ivhydration", payload);
+      await axios.post("http://localhost:5003/api/email/iv-hydration-update", {
+        isNew: !editing?._id,
+        service: payload,
+      });
+
       message.success("Saved successfully");
       setModalOpen(false);
       fetchServices();
@@ -134,6 +145,9 @@ const IVHydrationManager = () => {
               <Image src={srv.image} alt="IV" />
               <Title level={4}>{srv.name}</Title>
               <p>{srv.intro}</p>
+              <p>
+                <strong>Key Benefits</strong>
+              </p>
               <ul>
                 {srv.keyBenefits?.map((b, i) => (
                   <li key={i}>{b}</li>
@@ -183,14 +197,16 @@ const IVHydrationManager = () => {
         />
         <TextArea
           placeholder="Intro"
-          rows={2}
+          rows={4}
           value={formData.intro}
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, intro: e.target.value }))
           }
           style={{ marginBottom: "1rem" }}
         />
-
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Key Benefits</strong>
+        </div>
         {formData.keyBenefits.map((text, i) => (
           <Input
             key={i}
@@ -204,9 +220,12 @@ const IVHydrationManager = () => {
             style={{ marginBottom: "0.5rem" }}
           />
         ))}
+        <div style={{ marginBottom: "10px" }}>
+          <strong>Outro</strong>
+        </div>
         <TextArea
           placeholder="Outro"
-          rows={2}
+          rows={4}
           value={formData.outro}
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, outro: e.target.value }))

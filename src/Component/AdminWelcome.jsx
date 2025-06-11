@@ -1,4 +1,5 @@
-import React from "react";
+import { useEffect, useState } from "react";
+
 import styled from "styled-components";
 import { Typography, Card, Divider } from "antd";
 import {
@@ -13,21 +14,31 @@ import { useUserData } from "../context/UserDataContext";
 import { breakpoints } from "../FixedComponent/BreakPoints";
 const Wrapper = styled.div`
   padding: 3rem;
-
+  margin-bottom: 5rem;
   min-height: 100vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  @media screen and (max-width: 320px) {
+    padding: 1rem;
+  }
+  @media (min-width: 321px) and (max-width: 399px) {
+    padding: 1rem;
+  }
+  @media (min-width: 400px) and (max-width: 499px) {
+    padding: 1rem;
+  }
 `;
 
 const Content = styled(Card)`
-  max-width: 1200px;
-  width: 100%;
-  border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   padding: 0rem;
-  background: white;
+  /* background: white; */
+
   @media (min-width: ${breakpoints.xs}) {
+    max-width: 1200px;
+    width: 100%;
+    border-radius: 20px;
     padding: 2rem;
   }
   @media (min-width: ${breakpoints.m}) {
@@ -45,7 +56,7 @@ const Step = styled.div`
 `;
 
 const IconCircle = styled.div`
-  background-color: #e6f7ff;
+  /* background-color: #e6f7ff; */
   color: #1890ff;
   border-radius: 50%;
   width: 40px;
@@ -56,7 +67,21 @@ const IconCircle = styled.div`
 `;
 
 const AdminWelcome = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const { userData } = useUserData();
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 800);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 800);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <Wrapper>
       <Content>
@@ -83,12 +108,15 @@ const AdminWelcome = () => {
             <SettingOutlined />
           </IconCircle>
           <div>
-            <Text strong>1. Use the Sidebar:</Text>
+            <Text strong>
+              1. Use the {isSmallScreen ? "Footer Menu" : "Sidebar"}:
+            </Text>
             <Paragraph>
-              On the left sidebar, you'll see different sections like{" "}
-              <Text code> Home Services</Text>, <Text code>About</Text>,{" "}
-              <Text code>Single Services</Text>, etc. Click on any section you’d
-              like to update.
+              On{" "}
+              {isSmallScreen ? "the bottom menu (footer)" : "the left sidebar"},
+              you'll see different sections like <Text code>Home Services</Text>
+              , <Text code>About</Text>, <Text code>Single Services</Text>, etc.
+              Click on any section you’d like to update.
             </Paragraph>
           </div>
         </Step>

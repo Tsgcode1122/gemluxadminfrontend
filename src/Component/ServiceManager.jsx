@@ -12,6 +12,16 @@ import styled from "styled-components";
 const Container = styled.div`
   padding: 2rem;
   margin-top: 3rem;
+  margin-bottom: 5rem;
+  @media screen and (max-width: 320px) {
+    padding: 1rem;
+  }
+  @media (min-width: 321px) and (max-width: 399px) {
+    padding: 1rem;
+  }
+  @media (min-width: 400px) and (max-width: 499px) {
+    padding: 1rem;
+  }
 `;
 
 const Grid = styled.div`
@@ -59,10 +69,9 @@ const ImagePreview = styled.img`
 `;
 
 const CustomModalStyle = {
-  backdropFilter: "blur(8px)",
+  backdropFilter: "blur(18px)",
   backgroundColor: "rgba(255,255,255,0.6)",
   borderRadius: "12px",
-  boxShadow: "0 0 25px rgba(0, 0, 0, 0.3)",
 };
 
 const ServiceManager = () => {
@@ -129,6 +138,10 @@ const ServiceManager = () => {
       }
 
       await axios.put("http://localhost:5003/api/service", payload);
+      await axios.post(
+        "http://localhost:5003/api/email/home-service-update",
+        payload,
+      );
       message.success("Service saved successfully!");
       setModalOpen(false);
       fetchServices();

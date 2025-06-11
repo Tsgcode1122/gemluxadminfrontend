@@ -11,17 +11,23 @@ import styled from "styled-components";
 const Container = styled.div`
   padding: 1rem;
   margin-top: 3rem;
-  display: flex;
+  margin-bottom: 5rem !important;
+
+  align-items: center;
   flex-direction: column;
   justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
 `;
 const Contain = styled.div`
-  padding: 0rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 1rem;
-  max-width: 800px;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  justify-content: center;
+  width: 100%;
 `;
+
 const Card = styled.div`
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -32,7 +38,7 @@ const Card = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  max-height: 180px;
+  height: 400px;
   object-fit: cover;
   border-radius: 4px;
 `;
@@ -55,7 +61,13 @@ const ServiceModal = styled(Modal)`
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
   }
 `;
-
+const StyledInput = styled(Input)`
+  height: 28px;
+  /* font-size: 16px; */
+  padding: 0 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+`;
 const SingleServiceManager = () => {
   const [services, setServices] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -125,6 +137,10 @@ const SingleServiceManager = () => {
       if (editingService?._id) payload._id = editingService._id;
 
       await axios.put("http://localhost:5003/api/single-service", payload);
+      await axios.post("http://localhost:5003/api/email/weight-loss-update", {
+        isNew: !editingService?._id,
+        service: payload,
+      });
       message.success("Service saved");
       setModalOpen(false);
       fetchServices();
@@ -166,7 +182,7 @@ const SingleServiceManager = () => {
 
         <div style={{ textAlign: "center", marginTop: 30 }}>
           <Button type="primary" onClick={() => openModal()}>
-            Add New Single Service
+            Add New Weight loss Service
           </Button>
         </div>
       </Container>
@@ -180,13 +196,13 @@ const SingleServiceManager = () => {
         confirmLoading={loading}
         okText={editingService ? "Update This Service" : "Save New Service"}
       >
-        <Input
+        <StyledInput
           placeholder="Name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           style={{ marginBottom: 10 }}
         />
-        <Input
+        <StyledInput
           placeholder="Heading"
           value={formData.heading}
           onChange={(e) =>
@@ -194,7 +210,7 @@ const SingleServiceManager = () => {
           }
           style={{ marginBottom: 10 }}
         />
-        <Input
+        <StyledInput
           placeholder="Sub Heading"
           value={formData.subHeading}
           onChange={(e) =>
@@ -202,14 +218,15 @@ const SingleServiceManager = () => {
           }
           style={{ marginBottom: 10 }}
         />
-        <Input
+        <StyledInput
           placeholder="Price"
+          rows={3}
           value={formData.price}
           onChange={(e) => setFormData({ ...formData, price: e.target.value })}
           style={{ marginBottom: 10 }}
         />
-        <Input.TextArea
-          rows={3}
+        <StyledInput.TextArea
+          rows={6}
           placeholder="Writeup"
           value={formData.writeup}
           onChange={(e) =>
@@ -220,7 +237,8 @@ const SingleServiceManager = () => {
 
         <div>
           {formData.keyBenefits.map((b, i) => (
-            <Input
+            <StyledInput.TextArea
+              rows={3}
               key={i}
               placeholder={`Key Benefit ${i + 1}`}
               value={b}

@@ -2,6 +2,9 @@ import { createGlobalStyle } from "styled-components";
 import { breakpoints } from "./BreakPoints";
 
 const GlobalStyle = createGlobalStyle`
+.ant-modal-root .ant-modal-mask {
+    background-color: rgba(0, 0, 0, 0.86) !important; /* semi-transparent blue */
+  }
 h1 {
     font-size: 2.5rem;
     font-weight: bold;
