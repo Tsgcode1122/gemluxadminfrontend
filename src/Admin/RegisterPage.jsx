@@ -151,7 +151,7 @@ const RegisterPage = () => {
         message.success("Registration Successful");
         form.resetFields();
         setModalVisible(false);
-        navigate("/adminlogin", { state: { activeTab: "login" } });
+        navigate("/", { state: { activeTab: "login" } });
         setRegistrationSuccess(false);
       } else {
         message.error("Invalid verification code");
