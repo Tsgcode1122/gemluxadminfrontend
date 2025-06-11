@@ -17,7 +17,7 @@ const ImageUpload = ({ imagesUrl, setImagesUrl }) => {
       formData.append("image", file);
 
       const response = await axios.post(
-        "http://localhost:5003/api/signature/upload",
+        "https://gemluxeadminbackend.onrender.com/api/signature/upload",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

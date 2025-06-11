@@ -84,7 +84,9 @@ const ServiceManager = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get("http://localhost:5003/api/service");
+      const res = await axios.get(
+        "https://gemluxeadminbackend.onrender.com/api/service",
+      );
       setServices(res.data);
     } catch (err) {
       message.error("Failed to load services");
@@ -111,7 +113,7 @@ const ServiceManager = () => {
       const formData = new FormData();
       formData.append("image", file);
       const response = await axios.post(
-        "http://localhost:5003/api/signature/upload",
+        "https://gemluxeadminbackend.onrender.com/api/signature/upload",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } },
       );
@@ -137,9 +139,12 @@ const ServiceManager = () => {
         payload._id = editingService._id;
       }
 
-      await axios.put("http://localhost:5003/api/service", payload);
+      await axios.put(
+        "https://gemluxeadminbackend.onrender.com/api/service",
+        payload,
+      );
       await axios.post(
-        "http://localhost:5003/api/email/home-service-update",
+        "https://gemluxeadminbackend.onrender.com/api/email/home-service-update",
         payload,
       );
       message.success("Service saved successfully!");
@@ -163,7 +168,9 @@ const ServiceManager = () => {
 
   const handleDelete = async (serviceId) => {
     try {
-      await axios.delete(`http://localhost:5003/api/service/${serviceId}`);
+      await axios.delete(
+        `https://gemluxeadminbackend.onrender.com/api/service/${serviceId}`,
+      );
       message.success("Service deleted successfully!");
       fetchServices();
     } catch (error) {

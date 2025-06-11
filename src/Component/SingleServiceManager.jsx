@@ -85,7 +85,9 @@ const SingleServiceManager = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get("http://localhost:5003/api/single-service");
+      const res = await axios.get(
+        "https://gemluxeadminbackend.onrender.com/api/single-service",
+      );
       setServices(res.data);
     } catch {
       message.error("Failed to load services");
@@ -116,7 +118,7 @@ const SingleServiceManager = () => {
       const form = new FormData();
       form.append("image", file);
       const res = await axios.post(
-        "http://localhost:5003/api/signature/upload",
+        "https://gemluxeadminbackend.onrender.com/api/signature/upload",
         form,
       );
       setImageUrl(res.data.imageUrl);
@@ -136,11 +138,17 @@ const SingleServiceManager = () => {
       };
       if (editingService?._id) payload._id = editingService._id;
 
-      await axios.put("http://localhost:5003/api/single-service", payload);
-      await axios.post("http://localhost:5003/api/email/weight-loss-update", {
-        isNew: !editingService?._id,
-        service: payload,
-      });
+      await axios.put(
+        "https://gemluxeadminbackend.onrender.com/api/single-service",
+        payload,
+      );
+      await axios.post(
+        "https://gemluxeadminbackend.onrender.com/api/email/weight-loss-update",
+        {
+          isNew: !editingService?._id,
+          service: payload,
+        },
+      );
       message.success("Service saved");
       setModalOpen(false);
       fetchServices();
@@ -151,7 +159,9 @@ const SingleServiceManager = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5003/api/single-service/${id}`);
+      await axios.delete(
+        `https://gemluxeadminbackend.onrender.com/api/single-service/${id}`,
+      );
       message.success("Service deleted");
       fetchServices();
     } catch {

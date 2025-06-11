@@ -111,7 +111,7 @@ const RegisterPage = () => {
     try {
       const email = values.email.toLowerCase();
       const emailExistsResponse = await axios.post(
-        "http://localhost:5003/api/auth/check-exists",
+        "https://gemluxeadminbackend.onrender.com/api/auth/check-exists",
         {
           email: email,
         },
@@ -169,7 +169,7 @@ const RegisterPage = () => {
   const verifyCode = async (verificationCode) => {
     try {
       const response = await axios.post(
-        "http://localhost:5003/api/email/verify-code",
+        "https://gemluxeadminbackend.onrender.com/api/email/verify-code",
         {
           verificationCode,
           token: JSON.parse(localStorage.getItem("verificationToken")),

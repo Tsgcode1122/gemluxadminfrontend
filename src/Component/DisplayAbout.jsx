@@ -19,7 +19,9 @@ const DisplayAbout = () => {
 
   const fetchAboutData = async () => {
     try {
-      const res = await axios.get("http://localhost:5003/api/about");
+      const res = await axios.get(
+        "https://gemluxeadminbackend.onrender.com/api/about",
+      );
       setImagesUrl(res.data.image);
       setQuillText(res.data.content);
     } catch (err) {
@@ -46,9 +48,12 @@ const DisplayAbout = () => {
         image: imagesUrl,
       };
 
-      await axios.put("http://localhost:5003/api/about", updatedData);
+      await axios.put(
+        "https://gemluxeadminbackend.onrender.com/api/about",
+        updatedData,
+      );
       await axios.post(
-        "http://localhost:5003/api/email/about-update",
+        "https://gemluxeadminbackend.onrender.com/api/email/about-update",
         updatedData,
       );
       message.success("Post updated successfully!");
@@ -67,7 +72,7 @@ const DisplayAbout = () => {
       formData.append("image", file);
 
       const response = await axios.post(
-        "http://localhost:5003/api/signature/upload",
+        "https://gemluxeadminbackend.onrender.com/api/signature/upload",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

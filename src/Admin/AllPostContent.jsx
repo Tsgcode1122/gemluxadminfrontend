@@ -137,7 +137,7 @@ const AllPostContent = () => {
   const fetchBlogs = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5003/api/blogs/getBlogs",
+        "https://gemluxeadminbackend.onrender.com/api/blogs/getBlogs",
       );
       setBlogs(response.data);
     } catch (error) {
@@ -161,7 +161,9 @@ const AllPostContent = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5003/api/blogs/${selectedBlogId}`);
+      await axios.delete(
+        `https://gemluxeadminbackend.onrender.com/api/blogs/${selectedBlogId}`,
+      );
       message.success("Blog post deleted successfully!");
       setDeleteModalVisible(false);
       setSelectedBlogId(null);

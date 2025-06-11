@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
   const registerUser = async (userData) => {
     try {
       const response = await axios.post(
-        "http://localhost:5003/api/auth/register",
+        "https://gemluxeadminbackend.onrender.com/api/auth/register",
         userData,
       );
       console.log(response.data);
@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
   const loginUser = async (userData) => {
     try {
       const response = await axios.post(
-        "http://localhost:5003/api/auth/login",
+        "https://gemluxeadminbackend.onrender.com/api/auth/login",
         userData,
       );
       console.log(response.data);
@@ -38,7 +38,7 @@ export const UserProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.post(
-        "http://localhost:5003/api/auth/forgot-password",
+        "https://gemluxeadminbackend.onrender.com/api/auth/forgot-password",
         { email },
       );
       return response.data;

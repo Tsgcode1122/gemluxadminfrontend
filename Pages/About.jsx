@@ -43,7 +43,9 @@ const About = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:5003/api/about`);
+        const response = await axios.get(
+          `https://gemluxeadminbackend.onrender.com/api/about`,
+        );
         const data = response.data;
 
         // Populate form fields with data
@@ -67,7 +69,10 @@ const About = () => {
 
     try {
       const updatedData = { ...values, description: quillText, imagesUrl };
-      await axios.post(`http://localhost:5003/api/about`, updatedData);
+      await axios.post(
+        `https://gemluxeadminbackend.onrender.com/api/about`,
+        updatedData,
+      );
 
       message.success("Post updated successfully!");
 

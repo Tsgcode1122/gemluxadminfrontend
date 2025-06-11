@@ -60,7 +60,9 @@ const IVHydrationManager = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get("http://localhost:5003/api/ivhydration");
+      const res = await axios.get(
+        "https://gemluxeadminbackend.onrender.com/api/ivhydration",
+      );
       setServices(res.data);
     } catch {
       message.error("Failed to load services");
@@ -91,7 +93,7 @@ const IVHydrationManager = () => {
       const data = new FormData();
       data.append("image", file);
       const res = await axios.post(
-        "http://localhost:5003/api/signature/upload",
+        "https://gemluxeadminbackend.onrender.com/api/signature/upload",
         data,
       );
       setFormData((prev) => ({ ...prev, image: res.data.imageUrl }));
@@ -108,11 +110,17 @@ const IVHydrationManager = () => {
       const payload = editing?._id
         ? { ...formData, _id: editing._id }
         : formData;
-      await axios.put("http://localhost:5003/api/ivhydration", payload);
-      await axios.post("http://localhost:5003/api/email/iv-hydration-update", {
-        isNew: !editing?._id,
-        service: payload,
-      });
+      await axios.put(
+        "https://gemluxeadminbackend.onrender.com/api/ivhydration",
+        payload,
+      );
+      await axios.post(
+        "https://gemluxeadminbackend.onrender.com/api/email/iv-hydration-update",
+        {
+          isNew: !editing?._id,
+          service: payload,
+        },
+      );
 
       message.success("Saved successfully");
       setModalOpen(false);

@@ -14,7 +14,7 @@ export const ForgetPasswordProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.post(
-        "http://localhost:5003/api/auth/new-password",
+        "https://gemluxeadminbackend.onrender.com/api/auth/new-password",
         { email, newPassword },
       );
       console.log(response.data);

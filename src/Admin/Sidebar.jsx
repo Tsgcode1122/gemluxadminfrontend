@@ -116,7 +116,9 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5003/api/auth/");
+        const response = await axios.get(
+          "https://gemluxeadminbackend.onrender.com/api/auth/",
+        );
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching Users:", error);

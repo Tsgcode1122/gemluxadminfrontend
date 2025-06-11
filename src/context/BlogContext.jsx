@@ -15,7 +15,7 @@ export const BlogProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.put(
-        `${"http://localhost:5003/api/blogs"}/${id}`,
+        `${"https://gemluxeadminbackend.onrender.com/api/blogs"}/${id}`,
         updatedData,
       );
     } catch (error) {
@@ -29,7 +29,9 @@ export const BlogProvider = ({ children }) => {
   const deleteBlog = async (id) => {
     setLoading(true);
     try {
-      await axios.delete(`${"http://localhost:5003/api/blogs"}/${id}`);
+      await axios.delete(
+        `${"https://gemluxeadminbackend.onrender.com/api/blogs"}/${id}`,
+      );
       setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog._id !== id));
     } catch (error) {
       console.error("Error deleting blog:", error);

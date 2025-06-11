@@ -26,7 +26,7 @@ const ProtectedAdminDashboardPage = () => {
     const checkAdminStatus = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5003/api/auth/${userId}`,
+          `https://gemluxeadminbackend.onrender.com/api/auth/${userId}`,
         );
         setIsAdmin(response.data.isAdmin);
       } catch (error) {

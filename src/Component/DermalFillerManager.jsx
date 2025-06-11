@@ -46,7 +46,9 @@ const DermalFillerManager = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:5003/api/dermalfiller");
+    const res = await axios.get(
+      "https://gemluxeadminbackend.onrender.com/api/dermalfiller",
+    );
     setData(res.data);
   };
 
@@ -60,7 +62,7 @@ const DermalFillerManager = () => {
       const form = new FormData();
       form.append("image", file);
       const res = await axios.post(
-        "http://localhost:5003/api/signature/upload",
+        "https://gemluxeadminbackend.onrender.com/api/signature/upload",
         form,
       ); // Use your actual image upload route
       setFormData((prev) => ({ ...prev, image: res.data.imageUrl }));
@@ -87,11 +89,17 @@ const DermalFillerManager = () => {
   const handleSave = async () => {
     const payload = editing?._id ? { ...formData, _id: editing._id } : formData;
     try {
-      await axios.put("http://localhost:5003/api/dermalfiller", payload);
-      await axios.post("http://localhost:5003/api/email/dermal-filler-update", {
-        isNew: !editing?._id,
-        entry: payload,
-      });
+      await axios.put(
+        "https://gemluxeadminbackend.onrender.com/api/dermalfiller",
+        payload,
+      );
+      await axios.post(
+        "https://gemluxeadminbackend.onrender.com/api/email/dermal-filler-update",
+        {
+          isNew: !editing?._id,
+          entry: payload,
+        },
+      );
 
       message.success("Saved successfully");
       setModalOpen(false);
